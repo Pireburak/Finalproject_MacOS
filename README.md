@@ -1,4 +1,3 @@
-# Finalproject_MacOS
 # FinalProject_MacOS
 
 [![Platform](https://img.shields.io/badge/Platform-macOS-lightgrey.svg)](https://www.apple.com/macos/)
