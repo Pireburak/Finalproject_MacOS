@@ -1,31 +1,27 @@
 # Güvenlik Politikası (Security Policy)
 
-Bu projede güvenli kodlama standartlarına ve veri gizliliğine büyük önem verilmektedir. Lütfen tespit ettiğiniz güvenlik zafiyetlerini açık bir "Issue" oluşturmak yerine aşağıda belirtilen kanallar üzerinden bildiriniz.
+Bu proje (Advanced WebRTC Reconnaissance Module), akademik araştırma ve siber güvenlik eğitimleri kapsamında geliştirilmiş bir Konsept İspatı (Proof of Concept - PoC) çalışmasıdır. Geliştirici olarak, bilgi güvenliği standartlarına ve sorumlu ifşa (responsible disclosure) prensiplerine en yüksek önemi vermekteyiz.
 
-## Desteklenen Sürümler
+## Desteklenen Sürümler (Supported Versions)
 
-Aşağıdaki proje sürümleri şu anda güvenlik güncellemeleri almaktadır:
+Bu proje eğitim odaklı olduğu için yalnızca en güncel ana sürüm için aktif güvenlik yaması ve hata düzeltme desteği sunulmaktadır.
 
-| Sürüm | Güvenlik Desteği |
+| Sürüm (Version) | Destek Durumu (Supported) |
 | :--- | :--- |
-| v1.0.x | ✅ Aktif Destekleniyor |
-| < 1.0 | ❌ Desteklenmiyor |
+| v2.0.x | ✅ Tam Destek (Aktif) |
+| v1.0.x | ❌ Desteklenmiyor (Deprecated) |
 
-## Zafiyet Bildirim Süreci
+## Kapsam (Scope)
 
-Eğer bu projede bir güvenlik açığı tespit ederseniz, durumu bildirmek için lütfen aşağıdaki adımları izleyin:
+Aşağıdaki durumlar bu projenin güvenlik politikası **kapsamındadır**:
+* Araç çalışırken kodu barındıran sisteme zarar verebilecek (RCE, XSS vb.) istemci taraflı zafiyetler.
+* Araç tarafından yanlış veya yanıltıcı IP tespiti yapılmasına yol açan mantıksal hatalar.
+* Savunma mekanizmalarını (mDNS) aşmak için bulunmuş yeni bypass yöntemleri (Eğitim modülüne eklenmek üzere).
 
-1. Tespit ettiğiniz açığı (PoC - Proof of Concept) detaylandıran bir rapor hazırlayın. Raporda zafiyetin nerede olduğu ve nasıl tetiklendiği açıkça belirtilmelidir.
-2. Bu raporu doğrudan `[Senin E-posta Adresin]` adresine "GÜVENLİK ZAFİYETİ BİLDİRİMİ" başlığı ile gönderin.
-3. Gelen bildirimler en geç 48 saat içerisinde değerlendirilecek, doğrulama yapıldıktan sonra gerekli yama yayınlanana kadar süreç gizli tutulacaktır.
+Aşağıdaki durumlar **kapsam dışıdır**:
+* Tarayıcıların kendi çekirdek (core) WebRTC motorlarındaki sıfırıncı gün (0-day) açıkları (Bu durumlar doğrudan tarayıcı geliştiricilerine bildirilmelidir).
+* Sosyal mühendislik tabanlı saldırı senaryoları.
 
-## Projede Uygulanan Güvenlik Prensipleri
+## Zafiyet Bildirimi (Reporting a Vulnerability)
 
-Uygulamanın mimarisinde aşağıdaki temel güvenlik standartları göz önünde bulundurulmuştur:
-
-* **En Az Yetki Prensibi (Least Privilege):** macOS ortamında uygulamanın çalışması için yalnızca zorunlu sistem izinleri talep edilmiştir.
-* **Girdi Doğrulama (Input Validation):** Uygulama içerisindeki veri giriş noktaları, manipülasyon ve enjeksiyon risklerine karşı kontrol edilmektedir.
-* **Güvenli Veri Saklama:** Hassas veriler düz metin (plaintext) formatında tutulmaz, işletim sisteminin güvenli depolama mekanizmaları tercih edilir.
-* git add SECURITY.md
-git commit -m "Güvenlik politikası (SECURITY.md) eklendi"
-git push origin main
+Bu repodaki kodlarda veya modülün çalışma mantığında bir güvenlik zafiyeti tespit ederseniz,
