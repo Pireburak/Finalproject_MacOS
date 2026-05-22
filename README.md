@@ -11,9 +11,9 @@ Tüm bu süreç boyunca, işlemlerin arka planı ağ izleme araçlarıyla paket 
 
 ```mermaid
 graph LR
-    A[Hedef Belirleme] -->|Adım 1| B(recon.py ile Keşif)
-    B -->|Adım 2| C{tcpdump ile Ağ Analizi}
-    C -->|Adım 3| D[webrtc_zafiyeti.html ile Sömürü]
-    D -->|Sonuç| E((IP İfşası ve Doğrulama))
+    A[Hedef Belirleme] --> B[recon.py ile Kesif]
+    B --> C[tcpdump ile Ag Analizi]
+    C --> D[webrtc ile Somuru]
+    D --> E((IP Ifsasi))
 sudo tcpdump -i any port 80 -vv
 python3 recon.py <HEDEF_IP> <HEDEF_PORT>
