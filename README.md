@@ -15,5 +15,3 @@ graph LR
     B --> C[tcpdump ile Ag Analizi]
     C --> D[webrtc ile Somuru]
     D --> E((IP Ifsasi))
-sudo tcpdump -i any port 80 -vv
-python3 recon.py <HEDEF_IP> <HEDEF_PORT>
