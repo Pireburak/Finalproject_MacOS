@@ -1,4 +1,23 @@
-#🔬 CVE-2026-3312: WebKit WebCore Use-After-FreeApple WebKit Motorundaki Use-After-Free Zafiyetinin Kapsamlı Analizi ve Rust ile Simülasyonu Üniversite Final Ödevi — Siber Güvenlik Araştırma Projesi 🌐 Canlı Simülasyonu Tarayıcıda Deneyimleyin (Pages aktifse bu link çalışacaktır)📖 Proje HakkındaBu repository, Apple WebKit medya ve DOM işleme motorunda (WebCore) tespit edilen kritik bir Use-After-Free (UAF) zafiyeti olan CVE-2026-3312'nin derinlemesine teknik analizini, saldırı mekanizmasının simülasyonunu ve çözüm önerilerini içermektedir.Zafiyetin temel sebebi, WebKit'in asenkron DOM timer mekanizmasında (örneğin setTimeout callback'leri), DOM elementlerinin worker thread'ler veya arka plan işlemleri hâlâ çalışırken hafızadan serbest bırakılmasıdır. Bu durum klasik bir Use-After-Free race condition'a yol açmakta ve teorik olarak iOS/macOS cihazlarda Uzaktan Kod Çalıştırma (RCE) imkânı sunmaktadır.Proje; Rust ile yazılmış güvenli bir UAF simülasyonu, kapsamlı teknik dokümantasyon, GitHub Actions CI boru hattı otomasyonu ve tarayıcı tabanlı interaktif bir görselleştirme içermektedir.📂 Depo YapısıPlaintextFinalproject_MacOS/
+# 🔬 CVE-2026-3312: WebKit WebCore Use-After-Free
+
+**Apple WebKit Motorundaki Use-After-Free Zafiyetinin Kapsamlı Analizi ve Rust ile Simülasyonu** **Üniversite Final Ödevi — Siber Güvenlik Araştırma Projesi** [🌐 Canlı Simülasyonu Tarayıcıda Deneyimleyin](https://Pireburak.github.io/Finalproject_MacOS/) *(Pages aktifse bu link çalışacaktır)*
+
+---
+
+## 📖 Proje Hakkında
+
+Bu repository, Apple WebKit medya ve DOM işleme motorunda (WebCore) tespit edilen kritik bir Use-After-Free (UAF) zafiyeti olan **CVE-2026-3312**'nin derinlemesine teknik analizini, saldırı mekanizmasının simülasyonunu ve çözüm önerilerini içermektedir.
+
+Zafiyetin temel sebebi, WebKit'in asenkron DOM timer mekanizmasında (örneğin `setTimeout` callback'leri), DOM elementlerinin worker thread'ler veya arka plan işlemleri hâlâ çalışırken hafızadan serbest bırakılmasıdır. Bu durum klasik bir Use-After-Free race condition'a yol açmakta ve teorik olarak iOS/macOS cihazlarda Uzaktan Kod Çalıştırma (RCE) imkânı sunmaktadır.
+
+Proje; **Rust** ile yazılmış güvenli bir UAF simülasyonu, kapsamlı teknik dokümantasyon, GitHub Actions CI boru hattı otomasyonu ve tarayıcı tabanlı interaktif bir görselleştirme içermektedir.
+
+---
+
+## 📂 Depo Yapısı
+
+```text
+Finalproject_MacOS/
 │
 ├── 📁 .github/                     # GitHub topluluk ve CI/CD iş akışları
 │   ├── 📁 workflows/
@@ -35,7 +54,7 @@
                       ↓
 [Timer İşlemi]  Serbest bırakılan node bellek adresine erişmeye devam eder → UAF 💥
 🚀 Hızlı BaşlangıçGereksinimlerRust 1.70 veya üzeri → rustup.rsPython 3.8 veya üzeriModern bir web tarayıcısı (Safari, Chrome, Firefox)1. Rust PoC — UAF SimülasyonuBash# Projeyi klonlayın
-git clone https://github.com/Pireburak/Finalproject_MacOS.git
+git clone [https://github.com/Pireburak/Finalproject_MacOS.git](https://github.com/Pireburak/Finalproject_MacOS.git)
 cd Finalproject_MacOS/poc_rust
 
 # Release modunda derleyin
