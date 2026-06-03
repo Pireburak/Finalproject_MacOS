@@ -1,6 +1,6 @@
 # 🔬 CVE-2026-3312: WebKit WebCore Use-After-Free
 
-**Apple WebKit Motorundaki Use-After-Free Zafiyetinin Kapsamlı Analizi ve Rust ile Simülasyonu** **Üniversite Final Ödevi — Siber Güvenlik Araştırma Projesi** [🌐 Canlı Simülasyonu Tarayıcıda Deneyimleyin](https://Pireburak.github.io/Finalproject_MacOS/) *(Pages aktifse bu link çalışacaktır)*
+**Apple WebKit Motorundaki Use-After-Free Zafiyetinin Kapsamlı Analizi ve Rust ile Simülasyonu** **Üniversite Final Ödevi — Siber Güvenlik Araştırma Projesi** [🌐 Canlı Simülasyonu Tarayıcıda Deneyimleyin](https://github.com/Pireburak/Finalproject_MacOS/blob/main/webrtc_zafiyeti.html) *(Pages aktifse bu link çalışacaktır)*
 
 ---
 
